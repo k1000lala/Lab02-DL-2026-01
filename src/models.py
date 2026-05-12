@@ -21,12 +21,24 @@ class ShallowMultiLabelNet(nn.Module):
         hidden_dim: int = 32,
         dropout: float = 0.3,
         output_dim: int = 3,
+        activation: str = "relu",
     ) -> None:
         """Inicializa las capas de la red neuronal multilabel."""
 
         super().__init__()
+
+        activation_layers = {
+            "relu": nn.ReLU,
+            "tanh": nn.Tanh,
+            "leaky_relu": lambda: nn.LeakyReLU(0.01),
+        }
+        if activation not in activation_layers:
+            raise ValueError(
+                "activation debe ser uno de: relu, tanh, leaky_relu."
+            )
+
         self.fc1 = nn.Linear(input_dim, hidden_dim)
-        self.relu = nn.ReLU()
+        self.relu = activation_layers[activation]()
         self.dropout = nn.Dropout(dropout)
         self.fc2 = nn.Linear(hidden_dim, output_dim)
 
