@@ -74,11 +74,17 @@ class CognitiveMultiLabelDataset(Dataset):
     """Dataset simple de PyTorch para entradas tabulares y targets multilabel."""
 
     def __init__(self, X: np.ndarray, Y: np.ndarray) -> None:
+        """Inicializa tensores de entradas y etiquetas multilabel."""
+
         self.X = torch.tensor(X, dtype=torch.float32)
         self.Y = torch.tensor(Y, dtype=torch.float32)
 
     def __len__(self) -> int:
+        """Retorna la cantidad de ejemplos disponibles en el dataset."""
+
         return len(self.X)
 
     def __getitem__(self, index: int) -> tuple[torch.Tensor, torch.Tensor]:
+        """Obtiene las entradas y etiquetas asociadas a un indice."""
+
         return self.X[index], self.Y[index]

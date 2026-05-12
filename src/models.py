@@ -22,6 +22,8 @@ class ShallowMultiLabelNet(nn.Module):
         dropout: float = 0.3,
         output_dim: int = 3,
     ) -> None:
+        """Inicializa las capas de la red neuronal multilabel."""
+
         super().__init__()
         self.fc1 = nn.Linear(input_dim, hidden_dim)
         self.relu = nn.ReLU()
@@ -29,6 +31,8 @@ class ShallowMultiLabelNet(nn.Module):
         self.fc2 = nn.Linear(hidden_dim, output_dim)
 
     def forward(self, inputs: torch.Tensor) -> torch.Tensor:
+        """Calcula los logits de salida para un batch de entradas."""
+
         hidden = self.fc1(inputs)
         hidden = self.relu(hidden)
         hidden = self.dropout(hidden)
