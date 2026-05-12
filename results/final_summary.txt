@@ -1,0 +1,33 @@
+================================================================
+RESUMEN FINAL — Laboratorio 02 Deep Learning
+================================================================
+
+Configuración:
+- 5 folds externos × 3 folds internos (StratifiedKFold)
+- 36 configuraciones por fold interno
+- 50 pasadas Monte Carlo Dropout
+- BCEWithLogitsLoss + sigmoide + umbral 0.5 con desempate
+
+Resultados por target (promedio sobre 5 folds externos):
+
+Target     Hamming    F1-macro   F1-micro   ExactMatch  Uncertainty
+--------   --------   --------   --------   ----------  -----------
+GDS          0.1455     0.4026     0.5636       0.5639       0.0241
+GDS_R1       0.0703     0.6846     0.8946       0.8946       0.0263
+GDS_R2       0.1835     0.6572     0.7250       0.7238       0.0425
+GDS_R3       0.0925     0.7923     0.9076       0.9071       0.0455
+GDS_R4       0.1123     0.5052     0.8319       0.8293       0.0376
+GDS_R5       0.1525     0.4997     0.7718       0.7685       0.0504
+
+Mejor target (menor Hamming):    GDS_R1  (0.0703)
+Peor target (mayor Hamming):     GDS_R2  (0.1835)
+Target con menor incertidumbre:  GDS  (0.0241)
+Target con mayor incertidumbre:  GDS_R5  (0.0504)
+
+Hiperparámetros más frecuentemente seleccionados:
+- hidden_dim: 64 (11 de 30 selecciones)
+- dropout: 0.5 (11 de 30)
+- lr: 0.001 (18 de 30)
+- weight_decay: 0 (18 de 30)
+
+================================================================
